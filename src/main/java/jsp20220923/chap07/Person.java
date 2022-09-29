@@ -5,11 +5,8 @@ public class Person {
 	private Integer age;
 	private boolean alive;
 
-	public Person(String name, Integer age) {
-		super();
-		this.name = name;
-		this.age = age;
-	}
+
+	
 	public boolean isAlive() {
 		return alive;
 	}

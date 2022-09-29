@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-	<%!
-	//선언부 작성은 맨 위에 하는 것이 좋음
-	private void m1(){
-		System.out.println("선언부에 작성된 m");
-	}
-	%>
+<%!
+// 선언부를 작성한다면 맨 위에 작성하는 것이 해석할 때 편함
+private void method1() {
+	System.out.println("선언부에 작성된 메소드");
+}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,8 +14,19 @@
 </head>
 <body>
 	<h1>선언부로 메소드 작성 가능</h1>
+	
 	<%
-	m1();
-	%>
+	out.print(method1());
+	%>      //  자바 문법이랑 같으니까 이건 안되는거지.
+	
+	
+	<h1> <%
+	method1();
+	%></h1>
+	
+	
+	
+	
 </body>
 </html>
+
