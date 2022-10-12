@@ -1,4 +1,4 @@
-
+package servlet.chap14;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class Nana
+ * Servlet implementation class Servlet15
  */
-@WebServlet("/Nana")
-public class Nana extends HttpServlet {
+@WebServlet("/Servlet15")
+public class Servlet15 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Nana() {
+    public Servlet15() {
         super();
         // TODO Auto-generated constructor stub
     }
