@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -13,17 +15,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import domain.chap14.Product;
+
 /**
- * Servlet implementation class Servlet12
+ * Servlet implementation class Servlet21
  */
-@WebServlet("/Servlet12")
-public class Servlet12 extends HttpServlet {
+@WebServlet("/Servlet21")
+public class Servlet21 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public Servlet12() {
+	public Servlet21() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -34,45 +38,51 @@ public class Servlet12 extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String sql = "SELECT CustomerName "
-				+ "FROM Customers "
-			//	+"WHERE CustomerID<=2 "
-				+ "ORDER BY CustomerName";
-		try {
-			Class.forName("org.mariadb.jdbc.Driver");   //jdbc는 인터페이스?
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+		String id = request.getParameter("id");
+
+		// 2. request param 가공
+		if (id == null || id.equals("")) {
+			id = "1";
 		}
 
-		ServletContext application = request.getServletContext();   // getServletContext() : Gets the servlet context to which this ServletRequest was last dispatched.
+		String sql = "SELECT ProductName, Price FROM Products "
+				+ "WHERE ProductID = " + id; //sql을 스트링 연결연산자로 사용하는 것은 안전하지 않으므로 이렇게 쓰지 않도록 주의.
+		ServletContext application = request.getServletContext();
 
 		String url = application.getAttribute("jdbc.url").toString();
-	//	System.out.println(url);
 		String user = application.getAttribute("jdbc.username").toString();
-	//	System.out.println(user);
-		String password = application.getAttribute("jdbc.password").toString();
-	//	System.out.println(password);
+		String pw = application.getAttribute("jdbc.password").toString();
 
 		try (
-				Connection con = DriverManager.getConnection(url, user, password);
+				Connection con = DriverManager.getConnection(url, user, pw);
 				Statement stmt = con.createStatement();
 				ResultSet rs = stmt.executeQuery(sql);) {
-			System.out.println("문제없이 연결됨");
-//			System.out.println(rs.next());
-//			System.out.println(rs.getString(1));
-//			System.out.println(rs.next());
-//			System.out.println(rs.next());
 
-			while(rs.next()) {
-				System.out.println(rs.getString(1));
-					
+			List<Product> list = new ArrayList<>();
+			while (rs.next()) {
+				Product p=new Product();
+			//	p.setId(id);
+				p.setName(rs.getString("ProductName"));
+				p.setPrice(rs.getDouble("Price"));
+				
+				list.add(p);
+
+			//	product.setName(productName);
+			//	product.setPrice(price);
+			//	product.setId(id);
+
+				
 			}
-			
-			
+
+			// 4. add attribute
+			request.setAttribute("products", list);
+
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("문제가 발생됨");
 		}
+		// 5. forward / redirect
+		String path = "/WEB-INF/view/chap14/view09.jsp";
+		request.getRequestDispatcher(path).forward(request, response);
 
 	}
 

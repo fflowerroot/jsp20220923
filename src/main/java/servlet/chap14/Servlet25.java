@@ -14,16 +14,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class Servlet12
+ * Servlet implementation class Servlet25
  */
-@WebServlet("/Servlet12")
-public class Servlet12 extends HttpServlet {
+@WebServlet("/Servlet25")
+public class Servlet25 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public Servlet12() {
+	public Servlet25() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -34,46 +34,30 @@ public class Servlet12 extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String sql = "SELECT CustomerName "
-				+ "FROM Customers "
-			//	+"WHERE CustomerID<=2 "
-				+ "ORDER BY CustomerName";
-		try {
-			Class.forName("org.mariadb.jdbc.Driver");   //jdbc는 인터페이스?
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-
-		ServletContext application = request.getServletContext();   // getServletContext() : Gets the servlet context to which this ServletRequest was last dispatched.
+		String sql = "insert into Employees "
+				+ "(LastName,FirstName,BirthDate, Photo, Notes) "
+				+ "Values('Lee33','Sunshin','1900-01-01','emp.pic','Geberal')";
+		ServletContext application = request.getServletContext();
 
 		String url = application.getAttribute("jdbc.url").toString();
-	//	System.out.println(url);
 		String user = application.getAttribute("jdbc.username").toString();
-	//	System.out.println(user);
-		String password = application.getAttribute("jdbc.password").toString();
-	//	System.out.println(password);
-
+		String pw = application.getAttribute("jdbc.password").toString();
 		try (
-				Connection con = DriverManager.getConnection(url, user, password);
+				Connection con = DriverManager.getConnection(url, user, pw);
 				Statement stmt = con.createStatement();
 				ResultSet rs = stmt.executeQuery(sql);) {
-			System.out.println("문제없이 연결됨");
-//			System.out.println(rs.next());
-//			System.out.println(rs.getString(1));
-//			System.out.println(rs.next());
-//			System.out.println(rs.next());
 
-			while(rs.next()) {
-				System.out.println(rs.getString(1));
-					
+			int cnt = stmt.executeUpdate(sql);
+			System.out.println(cnt);
+			if (cnt == 1) {
+				String path = request.getContextPath() + "/Servlet24";
+				response.sendRedirect(path);
 			}
-			
-			
+
+			// Statement stmt= con.createStatement();
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("문제가 발생됨");
 		}
-
 	}
 
 	/**
