@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class Servlet03
  */
-@WebServlet("/Servlet03")
+@WebServlet("/Servlet03") // 서블릿은 매핑 없이 요청 안된대............. 
 public class Servlet03 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
