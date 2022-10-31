@@ -1129,7 +1129,7 @@ desc Employees;
 create TABLE Employees1 (LastName VARCHAR(255), Salary INT);
 create TABLE Salary1 (LastName VARCHAR(255), Salary INT);
 SELECT * from Salary1;
-SELECT * from Employees1;
+SELECT * from CustomerNameEmployees1;
 insert INTO Employees1(LastName,Salary)values('a',1);
 insert INTO Salary1(LastName,Salary)values('a',1);
 UPDATE Salary1 set Salary=11 where lastName='a';
@@ -1138,7 +1138,149 @@ ALTER TABLE Salary1 add COLUMN id int PRIMARY KEY;
 ALTER TABLE Employees1 add COLUMN id int PRIMARY KEY;
 
 UPDATE Salary1 set Salary= 23 where lastName='a';
-UPDATE Employees1 set Salary=10 where lastName='a'
+UPDATE Employees1 set Salary=10 where lastName='a';
+ select* from Bank;
+
+
+SELECT*from Customers;
+SELECT CustomerName FROM w3schools.Customers WHERE CustomerId = 77;
+SELECT*from Products;
+
+
+SELECT Price from Products WHERE ProductID=3;
+SELECT* from OrderDetails;
+SELECT Quantity from OrderDetails where OrderDetailID=1;
+select*from Employees;
+SELECT BirthDate from Employees WHERE EmployeeID=3;
+select CustomerName from Customers;
+select CustomerID from Customers;
+select Price from Products;
+	select FirstName, LastName from Employees where EmployeeID=1;
+    select CustomerName name, Country c from Customers where CustomerID=55;
+    select ProductName name, Price from Products;
+    
+    SELECT 
+	p.productId,
+    p.productName,
+    p.price,
+    s.supplierId,
+    s.supplierName,
+    s.phone
+FROM 
+	Products p JOIN Suppliers s
+    ON p.SupplierID = s.SupplierID
+WHERE
+	p.ProductID = 10;
+
+SELECT 
+	c.CategoryID,
+    c.CategoryName,
+    p.ProductName
+FROM Categories c JOIN Products p ON c.CategoryID = p.CategoryID
+WHERE c.CategoryId = 7	;
+
+SELECT c. CategoryID, c.CategoryName, p.ProductName, p.Price  from Categories c JOIN Products p on c.CategoryID = p.CategoryID
+where c.CategoryID=7;
+
+
+
+SELECT*from Categories c JOIN Products p on c.CategoryID = p.CategoryID
+where p.CategoryID=7;
+
+sELECT 
+		s.SupplierID,
+	    s.SupplierName,
+	    p.ProductId,
+	    p.ProductName,
+	    p.Price
+	FROM Products p JOIN Suppliers s ON p.SupplierID = s.SupplierID
+	WHERE s.SupplierID = 1	;
+
+
+select Productname from Products where price<=20;
+select Productname, price from Products where price &lt; 20;
+
+select FirstName FROM Employees where BirthDate > 1970;
+select FirstName FROM Employees where BirthDate > 19822;
+select FirstName FROM Employees where BirthDate > '1960-10-01';
+select FirstName FROM Employees where BirthDate &gt; '1960-10-01';
+select*FROM Employees ;
+select*FROM Customers;
+select*FROM Suppliers;
+
+select * from Customers where 
+
+;
+SELECT * from Products;
+SELECT productName from Products  where CategoryId=1
+and Price>=10;
+
+
+SELECT customerName from Customers where CustomerId=
+delete * from cu
+;
+SELECT* from Customers;
+DELETE from Customers where CustomerID=91;
+
+
+
+
+0	33	14:41:29	DELETE * from Customers where CustomerID=91	Error Code: 1064. 
+You have an error in your SQL syntax; check the manual that corresponds 
+to your MariaDB server version for the right syntax to use near '* from Customers where CustomerID=91' at line 1	0.015 sec
+
+
+	DELETE FROM Eployees
+	WHERE CustomerID = 1
+    ;
+    select* from Employees;
+    select* from Customers;
+    select* from Suppliers;
+
+drop DATABASE w3schools;
+select * from 
+
+;
+
+
+desc Customers;
+SELECT* FROM Suppliers;
+INSERT Suppliers ( SupplierName,;
+UPDATE Customers SET CustomerName;
+
+SELECT * FROM Suppliers;
+
+CREATE TABLE Coffee(
+name VARCHAR(22) PRIMARY key,
+coffee VARCHAR(22)
+);
+insert into Coffee ( ),
+
+;
+create table Bank(account VARCHAR(255),balance INT);
+insert into Bank(account,balance) values(1,10000),(2,20000);
+
+
+create database prj1;
+CREATE table Board(
+	id int PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(255) not null,
+    content VARCHAR(20000) not null
+    );
+  SELECT * from Board;
+alter TABLE Board
+add COLUMN content VARCHAR(2551) not null;
+
+
+alter TABLE Board add COLUMN inserted DATEtime DEFAULT now();
+alter TABLE Board DROP COLUMN content;
+
+
+
+
+
+
+
 
 
 
